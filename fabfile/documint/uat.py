@@ -26,6 +26,7 @@ def deploy():
 
 
 @task(default=True)
+@hosts('root@scarlet.fusionapp.com')
 def build_and_deploy():
     build()
     deploy()
