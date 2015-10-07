@@ -1,3 +1,3 @@
-from . import fusion, documint, diamond, tools
+from . import fusion, documint, diamond, dynamo, tools
 
-__all__ = ['fusion', 'documint', 'diamond', 'tools']
+__all__ = ['fusion', 'documint', 'diamond', 'dynamo', 'tools']
