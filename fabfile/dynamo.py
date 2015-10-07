@@ -9,6 +9,7 @@ def build_clj_dynamo():
             run('mkdir -p /srv/build/clj-dynamo')
             run('git clone --quiet https://github.com/ddormer/clj-dynamo.git /srv/build/clj-dynamo/src')
     with cd('/srv/build/clj-dynamo/src'):
+        run('git pull')
         run('docker pull idnar/lein')
         run('docker run --rm --tty --interactive --volume=/srv/build/clj-dynamo/.m2:/root/.m2 --volume=/srv/build/clj-dynamo/.lein:/root/.lein --volume=/srv/build/clj-dynamo/src:/lein idnar/lein uberjar')
         run('docker build --tag=fusionapp/dynamo --file=Dockerfile .')
