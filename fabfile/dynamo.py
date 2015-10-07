@@ -21,7 +21,7 @@ def deploy():
     with settings(warn_only=True):
         run('docker stop --time=30 dynamo')
         run('docker rm --volumes --force dynamo')
-    run('docker run --detach --restart=always --name=dynamo --publish=8080:8080 --volume="/srv/db/dynamo:/db" --workdir=/db fusionapp/dynamo --config /db/config.json')
+    run('docker run --detach --restart=always --name=dynamo --publish=8080:8080 --volume=/srv/db/dynamo:/db --workdir=/db fusionapp/dynamo --config /db/config.json')
 
 
 @task(default=True)
