@@ -17,7 +17,7 @@ def build():
         # XXX: This is really dumb, but it should be resolved by merging our
         # fork of Nevow upstream.
         run('rm /srv/build/fusion/wheelhouse/Nevow*')
-        run('docker run --rm --tty --interactive --volume="/srv/build/fusion:/application" --volume="/srv/build/fusion/wheelhouse:/wheelhouse" fusionapp/fusion-build')
+        run('docker run --rm --tty --interactive --volume=/srv/build/fusion:/application --volume=/srv/build/fusion/wheelhouse:/wheelhouse fusionapp/fusion-build')
         run('docker build --tag=fusionapp/fusion --file=docker/run.docker .')
 
 
@@ -27,8 +27,8 @@ def deploy():
     with settings(warn_only=True):
         run('docker stop --time=30 fusion')
         run('docker rm --volumes --force fusion')
-    run('docker run --rm --tty --interactive --volume="/srv/db/fusion:/db" fusionapp/fusion upgrade')
-    run('docker run --detach --restart=always --name=fusion --volume="/srv/db/fusion:/db" --publish=80:80 --publish=2233:23 --workdir=/db fusionapp/fusion')
+    run('docker run --rm --tty --interactive --volume=/srv/db/fusion:/db --volume=/srv/certs:/srv/certs fusionapp/fusion upgrade')
+    run('docker run --detach --restart=always --name=fusion --volume=/srv/db/fusion:/db --volume=/srv/certs:/srv/certs --publish=80:80 --publish=2233:23 --workdir=/db fusionapp/fusion')
 
 
 
