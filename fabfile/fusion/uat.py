@@ -17,7 +17,7 @@ def build():
         # XXX: This is really dumb, but it should be resolved by merging our
         # fork of Nevow upstream.
         run('rm /srv/build/fusion/wheelhouse/Nevow*')
-        run('docker run --rm --tty --interactive --volume="/srv/build/fusion:/application" --volume="/srv/build/fusion/wheelhouse:/wheelhouse" fusionapp/fusion-build')
+        run('docker run --rm --tty --interactive --volume=/srv/build/fusion:/application --volume=/srv/build/fusion/wheelhouse:/wheelhouse fusionapp/fusion-build')
         run('docker build --tag=fusionapp/fusion --file=docker/run.docker .')
 
 
