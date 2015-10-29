@@ -20,11 +20,12 @@ def build():
 @task
 @hosts('root@scarlet.fusionapp.com')
 def deploy():
-    with settings(warn_only=True):
-        run('docker stop --time=30 fusion-index')
-        run('docker rm --volumes --force fusion-index')
-    run('docker run --rm --interactive --volume=/srv/db/fusion-index:/db --volume=/srv/certs:/srv/certs fusionapp/fusion-index fusion-index --create --ca=/srv/certs/public/fusion-ca.crt.pem --cert=/srv/certs/private/scarlet.fusionapp.com.pem')
-    run('docker run --detach --name=fusion-index --volume=/srv/db/fusion-index:/db --volume=/srv/certs:/srv/certs --publish=8443:8443 --log-driver=none --workdir=/db fusionapp/fusion-index start --pidfile "" --nodaemon')
+    with settings(use_shell=False, always_use_pty=False):
+        with settings(warn_only=True):
+            run('docker stop --time=30 fusion-index')
+            run('docker rm --volumes --force fusion-index')
+        run('docker run --rm --interactive --volume=/srv/db/fusion-index:/db --volume=/srv/certs:/srv/certs fusionapp/fusion-index fusion-index --create --ca=/srv/certs/public/fusion-ca.crt.pem --cert=/srv/certs/private/scarlet.fusionapp.com.pem')
+        run('docker run --detach --restart=always --name=fusion-index --volume=/srv/db/fusion-index:/db --volume=/srv/certs:/srv/certs --publish=8443:8443 --log-driver=none --workdir=/db fusionapp/fusion-index start --pidfile "" --nodaemon')
 
 
 @task(default=True)
