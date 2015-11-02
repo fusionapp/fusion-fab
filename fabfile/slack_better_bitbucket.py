@@ -3,7 +3,7 @@ from fabric.api import cd, hosts, run, settings, task
 
 @task
 @hosts('root@scarlet.fusionapp.com')
-def build_slack_better_bitbucket():
+def build():
     with settings(warn_only=True):
         if run('test -d /srv/build/slack_better_bitbucket').failed:
             run('mkdir -p /srv/build/slack_better_bitbucket')
@@ -27,5 +27,5 @@ def deploy():
 @task(default=True)
 @hosts('root@scarlet.fusionapp.com')
 def build_and_deploy():
-    build_slack_better_bitbucket()
+    build()
     deploy()
