@@ -35,6 +35,12 @@ def deploy():
     run('docker run --detach --restart=always --name=fusion --volume=/srv/db/fusion:/db --volume=/srv/certs:/srv/certs --publish=80:80 --publish=2233:23 --workdir=/db fusionapp/fusion:uat')
 
 
+@task
+@hosts('root@scarlet.fusionapp.com')
+def backup():
+    run('/usr/local/bin/fusion-backup fusion /srv/db/fusion s3://s3-eu-west-1.amazonaws.com/backups-eu-uat.fusionapp.com')
+
+
 @task(default=True)
 @hosts('root@scarlet.fusionapp.com')
 def build_and_deploy():
