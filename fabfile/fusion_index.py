@@ -11,10 +11,8 @@ def build():
         with cd('/srv/build/fusion-index'):
             run('git fetch --quiet --depth 1')
             run('git reset --hard origin/master')
-            run('docker build --tag=fusionapp/fusion-index-base --file=docker/base.docker .')
-            run('docker build --tag=fusionapp/fusion-index-build --file=docker/build.docker .')
-            run('docker run --rm --volume=/srv/build/fusion-index:/application --volume=/srv/build/fusion-index/wheelhouse:/wheelhouse fusionapp/fusion-index-build')
-            run('docker build --tag=fusionapp/fusion-index --file=docker/run.docker .')
+            run('docker run --rm --volume=/srv/build/fusion-index:/application --volume=/srv/build/fusion-index/wheelhouse:/wheelhouse fusionapp/base')
+            run('docker build --tag=fusionapp/fusion-index --file=docker/fusion-index.docker .')
 
 
 @task
