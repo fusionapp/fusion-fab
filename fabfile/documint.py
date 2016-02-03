@@ -7,14 +7,13 @@ def build():
     with settings(use_shell=False, always_use_pty=False):
         with settings(warn_only=True):
             if run('test -d /srv/build/documint').failed:
-                run('git clone --quiet -- https://github.com/fusionapp/documint.git /srv/build/documint')
+                run('git clone --quiet --depth 1 -- https://github.com/fusionapp/documint.git /srv/build/documint')
         with cd('/srv/build/documint'):
-            run('git pull --quiet')
-            run('docker build --tag=fusionapp/documint-base --file=docker/base.docker .')
-            run('docker build --tag=fusionapp/documint-build --file=docker/build.docker .')
-            run('docker run --rm --interactive --volume="/srv/build/documint:/application" --volume="/srv/build/documint/wheelhouse:/wheelhouse" fusionapp/documint-build')
+            run('git fetch --quiet --depth 1 origin master')
+            run('git reset --hard origin/master')
+            run('docker run --rm --volume="/srv/build/documint:/application" --volume="/srv/build/documint/wheelhouse:/wheelhouse" fusionapp/base')
             run('cp /srv/build/clj-neon/src/target/uberjar/clj-neon-*-standalone.jar bin/clj-neon.jar')
-            run('docker build --tag=fusionapp/documint --file=docker/run.docker .')
+            run('docker build --tag=fusionapp/documint --file=docker/documint.docker .')
             run('docker tag -f fusionapp/documint scarlet.fusionapp.com:5000/fusionapp/documint')
             run('docker push scarlet.fusionapp.com:5000/fusionapp/documint')
 

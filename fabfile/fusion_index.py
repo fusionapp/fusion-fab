@@ -4,7 +4,7 @@ from fabric.api import cd, hosts, run, settings, task
 @task
 @hosts('root@scarlet.fusionapp.com')
 def build():
-    with settings(always_use_pty=False):
+    with settings(use_shell=False, always_use_pty=False):
         with settings(warn_only=True):
             if run('test -d /srv/build/fusion-index').failed:
                 run('git clone --quiet --depth 1 -- https://github.com/fusionapp/fusion-index.git /srv/build/fusion-index')
