@@ -4,17 +4,15 @@ from fabric.api import cd, hosts, run, settings, task
 @task
 @hosts('root@scarlet.fusionapp.com')
 def build():
-    with settings(always_use_pty=False):
+    with settings(use_shell=False, always_use_pty=False):
         with settings(warn_only=True):
             if run('test -d /srv/build/fusion-index').failed:
                 run('git clone --quiet --depth 1 -- https://github.com/fusionapp/fusion-index.git /srv/build/fusion-index')
         with cd('/srv/build/fusion-index'):
             run('git fetch --quiet --depth 1')
             run('git reset --hard origin/master')
-            run('docker build --tag=fusionapp/fusion-index-base --file=docker/base.docker .')
-            run('docker build --tag=fusionapp/fusion-index-build --file=docker/build.docker .')
-            run('docker run --rm --volume=/srv/build/fusion-index:/application --volume=/srv/build/fusion-index/wheelhouse:/wheelhouse fusionapp/fusion-index-build')
-            run('docker build --tag=fusionapp/fusion-index --file=docker/run.docker .')
+            run('docker run --rm --volume=/srv/build/fusion-index:/application --volume=/srv/build/fusion-index/wheelhouse:/wheelhouse fusionapp/base')
+            run('docker build --tag=fusionapp/fusion-index --file=docker/fusion-index.docker .')
 
 
 @task
