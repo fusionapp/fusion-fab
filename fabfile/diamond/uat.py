@@ -26,7 +26,7 @@ def build():
             run('hg update uat')
             run('docker run --rm --volume="/srv/build/diamond:/application" --volume="/srv/build/diamond/wheelhouse:/wheelhouse" fusionapp/base')
             run('cp /srv/build/clj-neon/src/target/uberjar/clj-neon-*-standalone.jar bin/clj-neon.jar')
-            run('docker build --tag=fusionapp/diamond --file=docker/diamond.docker .')
+            run('docker build --tag=fusionapp/diamond:uat --file=docker/diamond.docker .')
 
 
 @task
@@ -36,8 +36,8 @@ def deploy():
         with settings(warn_only=True):
             run('docker stop --time=30 diamond')
             run('docker rm --volumes --force diamond')
-        run('docker run --rm --volume="/srv/db/diamond:/db" fusionapp/diamond upgrade')
-        run('docker run --detach --restart=always --name=diamond --volume="/srv/db/diamond:/db" --publish=443:443 --publish=8021:8021 --workdir=/db fusionapp/diamond')
+        run('docker run --rm --volume="/srv/db/diamond:/db" fusionapp/diamond:uat upgrade')
+        run('docker run --detach --restart=always --name=diamond --volume="/srv/db/diamond:/db" --publish=443:443 --publish=8021:8021 --workdir=/db fusionapp/diamond:uat')
 
 
 @task(default=True)
