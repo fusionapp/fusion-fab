@@ -1,3 +1,3 @@
-from . import uat
+from . import uat, prod
 
-__all__ = ['uat']
+__all__ = ['uat', 'prod']
