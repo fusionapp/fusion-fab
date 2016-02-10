@@ -1,9 +1,9 @@
 from . import (
-    diamond, documint, dynamo, entropy, fusion, fusion_index, registry,
+    diamond, documint, drone, dynamo, entropy, fusion, fusion_index, registry,
     slack_better_bitbucket, soapproxy, tools)
 
 
 
 __all__ = [
     'fusion', 'documint', 'diamond', 'dynamo', 'tools', 'fusion_index',
-    'registry', 'slack_better_bitbucket', 'entropy', 'soapproxy']
+    'registry', 'slack_better_bitbucket', 'entropy', 'soapproxy', 'drone']
