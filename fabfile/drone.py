@@ -24,6 +24,5 @@ def deploy():
         '--env SERVER_KEY=/srv/certs/private/drone.fusionapp.com.pem',
         '--env PLUGIN_FILTER="plugins/* fusionapp/*"',
         '--env ESCALATE_FILTER="plugins/drone-docker fusionapp/drone-docker"',
-        '--env DEBUG=true',
         'drone/drone:0.4'
         ]))
