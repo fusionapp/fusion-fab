@@ -35,7 +35,7 @@ def deploy():
         with settings(warn_only=True):
             run('docker stop --time=30 fusion')
             run('docker rm --volumes --force fusion')
-        run('docker run --rm --volume=/srv/db/fusion:/db --volume=/srv/certs:/srv/certs scarlet.fusionapp.com:5000/fusionapp/fusion:uat upgrade')
+        run('docker run --rm --volume=/srv/db/fusion:/db --volume=/srv/certs:/srv/certs:ro scarlet.fusionapp.com:5000/fusionapp/fusion:uat upgrade')
         run('docker run --detach --restart=always --name=fusion --volume=/srv/db/fusion:/db --volume=/srv/certs:/srv/certs:ro --publish=80:80 --publish=2233:23 scarlet.fusionapp.com:5000/fusionapp/fusion:uat')
 
 
