@@ -19,7 +19,7 @@ def build():
                 '--workdir', '/src',
                 '--entrypoint', '/bin/bash',
                 'node:5.6.0-slim',
-                '-c', 'npm install && npm run test && npm run dev-build',
+                '-c', '"npm install && npm run test && npm run dev-build"',
                 ]))
             run('mkdir -p /srv/build/fusion/uat/wheelhouse')
             run('cp -u /srv/build/diamond/wheelhouse/diamond*.whl /srv/build/fusion/uat/wheelhouse')
