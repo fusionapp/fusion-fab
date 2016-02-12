@@ -36,8 +36,8 @@ def deploy():
         with settings(warn_only=True):
             run('docker stop --time=30 diamond')
             run('docker rm --volumes --force diamond')
-        run('docker run --rm --volume="/srv/db/diamond:/db" fusionapp/diamond:uat upgrade')
-        run('docker run --detach --restart=always --name=diamond --volume="/srv/db/diamond:/db" --publish=443:443 --publish=8021:8021 --workdir=/db fusionapp/diamond:uat')
+        run('docker run --rm --env PYRSISTENT_NO_C_EXTENSION=1 --volume="/srv/db/diamond:/db" fusionapp/diamond:uat upgrade')
+        run('docker run --detach --restart=always --name=diamond --env PYRSISTENT_NO_C_EXTENSION=1 --volume="/srv/db/diamond:/db" --publish=443:443 --publish=8021:8021 --workdir=/db fusionapp/diamond:uat')
 
 
 @task(default=True)
