@@ -1,4 +1,5 @@
 from fabric.api import cd, hosts, run, settings, task
+from . import eliot
 
 
 @task(default=True)
@@ -13,3 +14,5 @@ def build():
             run('git reset --hard origin/master')
             run('docker build --tag=scarlet.fusionapp.com:5000/fusionapp/fusion-tools --file=docker/tools.docker .')
             run('docker push scarlet.fusionapp.com:5000/fusionapp/fusion-tools')
+
+__all__ = ['build', 'eliot']
