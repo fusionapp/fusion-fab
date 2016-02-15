@@ -23,7 +23,7 @@ def build():
                 ]))
             run('mkdir -p /srv/build/fusion/uat/wheelhouse')
             run('cp -u /srv/build/diamond/wheelhouse/diamond*.whl /srv/build/fusion/uat/wheelhouse')
-            run('docker run --rm --volume=/srv/build/fusion/uat:/application --volume=/srv/build/fusion/uat/wheelhouse:/wheelhouse fusionapp/base')
+            run('docker run --rm --volume=/srv/build/fusion/uat:/application --volume=/srv/build/fusion/uat/wheelhouse:/wheelhouse fusionapp/base:cpython')
             run('docker build --tag=scarlet.fusionapp.com:5000/fusionapp/fusion:uat --file=docker/fusion.docker .')
             run('docker push scarlet.fusionapp.com:5000/fusionapp/fusion:uat')
 
