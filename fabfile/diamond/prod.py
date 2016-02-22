@@ -1,4 +1,4 @@
-from fabric.api import cd, hosts, run, settings, task
+from fabric.api import hosts, run, settings, task
 
 
 @task
