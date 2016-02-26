@@ -1,3 +1,1 @@
-from . import uat
-
-__all__ = ['uat']
+__all__ = []
