@@ -21,7 +21,7 @@ def deploy():
     with settings(warn_only=True):
         run('docker stop --time=30 clj-documint')
         run('docker rm --volumes --force clj-documint')
-    run('docker run --detach --restart=always --name=clj-documint --publish=3000:3000 --volume=/srv/db/clj-documint:/db --workdir=/db fusionapp/clj-documint --config=/db/config.json')
+    run('docker run --detach --restart=always --name=clj-documint --publish=3000:3000 --volume=/srv/db/clj-documint:/db --workdir=/db fusionapp/clj-documint')
 
 
 @task(default=True)
