@@ -35,3 +35,9 @@ def diamond_prod(suffix='', args=''):
 @hosts('root@scarlet.fusionapp.com')
 def fusion_uat(suffix='', args=''):
     runEliot('/srv/db/fusion/fusion.axiom', suffix, args)
+
+
+@task(name='fusion-prod')
+@hosts('root@onyx.fusionapp.com')
+def fusion_prod(suffix='', args=''):
+    runEliot('/srv/db/fusion/fusion.axiom', suffix, args)
