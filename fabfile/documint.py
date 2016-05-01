@@ -13,8 +13,7 @@ def build():
             run('git reset --hard origin/master')
             run('docker run --rm --volume="/srv/build/documint:/application" --volume="/srv/build/documint/wheelhouse:/wheelhouse" fusionapp/base')
             run('cp /srv/build/clj-neon/src/target/uberjar/clj-neon-*-standalone.jar bin/clj-neon.jar')
-            run('docker build --tag=fusionapp/documint --file=docker/documint.docker .')
-            run('docker tag -f fusionapp/documint scarlet.fusionapp.com:5000/fusionapp/documint')
+            run('docker build --tag=scarlet.fusionapp.com:5000/fusionapp/documint --file=docker/documint.docker .')
             run('docker push scarlet.fusionapp.com:5000/fusionapp/documint')
 
 
@@ -23,8 +22,12 @@ def build():
 def deploy():
     with settings(use_shell=False, always_use_pty=False):
         run('docker pull scarlet.fusionapp.com:5000/fusionapp/documint')
-        run('docker tag -f scarlet.fusionapp.com:5000/fusionapp/documint fusionapp/documint')
         with settings(warn_only=True):
             run('docker stop --time=30 documint')
             run('docker rm --volumes --force documint')
-        run('docker run --detach --restart=always --name=documint --volume=/srv/db/documint:/db --publish=8750:8750 fusionapp/documint --keystore=/db/documint_keystore_uat.jks --password=123456 --privateKeyPassword=123456')
+        run('docker run --detach --restart=always --name=documint '
+            '--volume=/srv/db/documint:/db --publish=8750:8750 '
+            'scarlet.fusionapp.com:5000/fusionapp/documint '
+            '--keystore=/db/documint_keystore_uat.jks '
+            '--password=123456 '
+            '--privateKeyPassword=123456')
