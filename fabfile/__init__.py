@@ -1,8 +1,7 @@
 from fabric.api import env
 
 from . import (
-    clj_documint, diamond, documint, drone, dynamo, fusion, fusion_index,
-    registry, slack_better_bitbucket, soapproxy, tools)
+    clj_documint, diamond, documint, fusion, fusion_index, soapproxy, tools)
 
 
 
@@ -14,5 +13,5 @@ env.roledefs = {
 
 
 __all__ = [
-    'fusion', 'documint', 'diamond', 'dynamo', 'tools', 'fusion_index',
-    'registry', 'slack_better_bitbucket', 'soapproxy', 'drone', 'clj_documint']
+    'fusion', 'documint', 'diamond', 'tools', 'fusion_index', 'soapproxy',
+    'clj_documint']
