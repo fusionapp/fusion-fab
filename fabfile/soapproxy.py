@@ -18,7 +18,7 @@ def deploy():
         'fusionapp/soapproxy',
         '--endpoint',
         'ssl:8080:privateKey=/srv/certs/private/star.fusionapp.com.pem:extraCertChain=/srv/certs/private/star.fusionapp.com.pem',
-        '--uri', 'https://196.8.131.140:13203',
+        '--uri', 'https://196.8.131.140:13204',
         '--no-verify-tls',
         ]))
     run(' '.join([
