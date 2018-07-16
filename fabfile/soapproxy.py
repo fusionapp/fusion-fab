@@ -18,7 +18,7 @@ def deploy():
         'fusionapp/soapproxy',
         '--endpoint',
         'ssl:8080:privateKey=/srv/certs/private/star.fusionapp.com.pem:extraCertChain=/srv/certs/private/star.fusionapp.com.pem',
-        '--uri', 'https://196.8.131.140:13204',
+        '--uri', 'https://testmobilebanking.standardbank.co.za:13204',
         '--no-verify-tls',
         ]))
     run(' '.join([
@@ -31,7 +31,7 @@ def deploy():
         'fusionapp/soapproxy',
         '--endpoint',
         'ssl:8081:privateKey=/srv/certs/private/star.fusionapp.com.pem:extraCertChain=/srv/certs/private/star.fusionapp.com.pem',
-        '--uri', 'https://196.8.131.140:8000',
+        '--uri', 'https://testmobilebanking.standardbank.co.za:8000',
         '--no-verify-tls',
         '--client-cert', '/srv/certs/private/sbvaf-fusion.pem',
         ]))
@@ -45,7 +45,7 @@ def deploy():
         'fusionapp/soapproxy',
         '--endpoint',
         'ssl:8082:privateKey=/srv/certs/private/star.fusionapp.com.pem:extraCertChain=/srv/certs/private/star.fusionapp.com.pem',
-        '--uri', 'https://196.8.131.140:13203',
+        '--uri', 'https://testmobilebanking.standardbank.co.za:13203',
         '--no-verify-tls',
         ]))
     run(' '.join([
@@ -72,7 +72,7 @@ def deploy():
         'fusionapp/soapproxy',
         '--endpoint',
         'ssl:8084:privateKey=/srv/certs/private/star.fusionapp.com.pem:extraCertChain=/srv/certs/private/star.fusionapp.com.pem',
-        '--uri', 'https://196.8.110.17:21003',
+        '--uri', 'https://mobilebanking.standardbank.co.za:21003',
         '--no-verify-tls',
         ]))
     run(' '.join([
